@@ -24,24 +24,42 @@ public class chatFilterCommand extends SimpleCommand {
 		} else if (args.length > 1) {
 			if (args[0].equals("add")) {
 				if (sender.hasPermission("chatfilter.admin")) {
-					filterStorage.addNonoWord(args[1]);
-					tell("Successfully added " + args[1] + " to the nono-words list!");
-
+					String[] words = args[1].split(",");
+					for (String word : words) {
+						filterStorage.addNonoWord(word.trim());
+					}
+					tell("Successfully added " + words.length + " words to the list!");
 				} else {
-					throw new CommandException(new java.lang.String[]{"&c" + SimpleLocalization.Commands.PERMS_NO});
+					throw new CommandException(SimpleLocalization.Commands.PERMS_NO);
 				}
 
-			}
-			// remove command
 
+			} else if (args[0].equals("remove")) {
+				if (sender.hasPermission("chatfilter.admin")) {
+					String[] words = args[1].split(",");
+					for (String word : words) {
+
+						if (filterStorage.isNonoWord(word.trim())) {
+							filterStorage.removeNonoWord(word.trim());
+							tell("Successfully removed " + words.length + " words from the list!");
+
+						} else {
+							tell("The word " + word + " is not in the list!");
+						}
+					}
+					
+				} else {
+					throw new CommandException(SimpleLocalization.Commands.PERMS_NO);
+				}
+			} else { // third option?
+				tell("Usage: /chatfilter <add/remove> <word>");
+			}
 
 		} else {
 			tell("Usage: /chatfilter <add/remove> <word>");
 		}
 
-
 	}
-
 
 	protected chatFilterCommand() {
 		super("chatfilter|cf|chatf|cfilter");

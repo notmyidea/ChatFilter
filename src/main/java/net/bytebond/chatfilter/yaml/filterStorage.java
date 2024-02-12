@@ -104,6 +104,16 @@ public class filterStorage {
 		return false;
 	}
 
+	public static boolean isNonoWord(String word) {
+		List<String> nonoWords = readNonoWordsFromFile();
+		for (String nonoWord : nonoWords) {
+			if (word.equals(nonoWord)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static filterStorage getInstance() {
 		return new filterStorage();
 	}

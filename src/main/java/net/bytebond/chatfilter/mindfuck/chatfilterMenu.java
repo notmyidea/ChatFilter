@@ -13,35 +13,19 @@ import org.mineacademy.fo.remain.CompMaterial;
 public class chatfilterMenu extends Menu {
 
 	//@Position(start = StartPosition.TOP_LEFT, value = 1)
+
+
 	@Position(3)
-	private final Button viewFiltersButton;
 
-	@Position(4)
-	private final Button viewPunishedButton;
-
-	@Position(5)
-	private final Button viewLogButton;
-
+	private final Button AddFilterButton;
 	@Position(8)
 	private final Button versionButton;
 
 	public chatfilterMenu() {
-		this.setTitle(ChatColor.GOLD + "ChatFilter menu V.1.2.1"); // grab from ${project.version} in ../pom.xml
+		this.setTitle(ChatColor.GOLD + "ChatFilter menu V.1.3"); // grab from ${project.version} in ../pom.xml
 		this.setSize(9 * 1);
 		//this.setSlotNumbersVisible();
-		this.viewFiltersButton = new Button() {
-			@Override
-			public void onClickedInMenu(Player player, Menu menu, ClickType click) {
-				new viewFilterMenu().displayTo(player);
-			}
-
-			@Override
-			public ItemStack getItem() {
-				return ItemCreator.of(CompMaterial.PAPER).name("View Filters").make();
-			}
-
-		};
-		this.viewPunishedButton = new Button() {
+		this.AddFilterButton = new Button() {
 			@Override
 			public void onClickedInMenu(Player player, Menu menu, ClickType click) {
 
@@ -49,32 +33,21 @@ public class chatfilterMenu extends Menu {
 
 			@Override
 			public ItemStack getItem() {
-				return ItemCreator.of(CompMaterial.IRON_BARS).name("View Punished Players").make();
-			}
-
-		};
-		this.viewLogButton = new Button() {
-			@Override
-			public void onClickedInMenu(Player player, Menu menu, ClickType click) {
-
-			}
-
-			@Override
-			public ItemStack getItem() {
-				return ItemCreator.of(CompMaterial.BOOK).name("View Logs").make();
+				return ItemCreator.of(CompMaterial.WRITABLE_BOOK).name("Create a new Filter").make();
 			}
 		};
+
 
 		// kind of useless but the menu looks unsymmetrical without it
 		this.versionButton = new Button() {
 			@Override
 			public void onClickedInMenu(Player player, Menu menu, ClickType click) {
-
+				
 			}
 
 			@Override
 			public ItemStack getItem() {
-				return ItemCreator.of(CompMaterial.PLAYER_HEAD).name("Version 1.2.1").make();
+				return ItemCreator.of(CompMaterial.PLAYER_HEAD).name("Version 1.3").lore("https://github.com/notmyidea/ChatFilter").make();
 			}
 		};
 	}
