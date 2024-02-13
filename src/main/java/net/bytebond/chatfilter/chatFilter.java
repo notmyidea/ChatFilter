@@ -15,14 +15,18 @@ public final class chatFilter extends SimplePlugin {
 		System.out.println("ChatFilter has been enabled");
 
 		Common.setLogPrefix("&8[ChatFilter]&f");
-		Common.setTellPrefix("&8ChatFilter // &f");
+		Common.setTellPrefix("&8[ChatFilter]&f");
+		Common.setTellPrefix("&8[ChatFilter]&f");
 
-		Common.log("log message");
-		Common.logNoPrefix("log message without prefix");
-		Common.warning("warning message");
+		//Common.log("log message");
+		//Common.logNoPrefix("Thank you for downloading ChatFilter v1.3.2");
+		//Common.warning("warning message");
 
-		Common.logFramed("log message," +
-				"in a frame");
+		Common.logFramed("Thank you for downloading ChatFilter v1.3.2, \n" +
+				" you can view the source code at https://www.github.com/notmyidea/ChatFilter \n" +
+				" or report issues at https://www.github.com/notmyidea/ChatFilter/issues \n" +
+				" if you enjoy this resource, dont forget to leave a review on spigotmc.org ");
+
 
 		//Menu.setSound(null);
 		//Button.setInfoButtonTitle("Info");

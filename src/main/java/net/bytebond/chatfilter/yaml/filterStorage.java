@@ -22,28 +22,28 @@ public class filterStorage {
 
 		// Read nono-words from file
 		List<String> readNonoWords = readNonoWordsFromFile();
-		System.out.println("Read nono-words: " + readNonoWords);
+		//System.out.println("Read nono-words: " + readNonoWords);
 
 		// Add a new nono-word
 		////addNonoWord("slur3");
 
 		// Read nono-words again after adding
 		readNonoWords = readNonoWordsFromFile();
-		System.out.println("Read nono-words after adding: " + readNonoWords);
+		//System.out.println("Read nono-words after adding: " + readNonoWords);
 
 		// Remove a nono-word
 		removeNonoWord("slur1");
 
 		// Read nono-words again after removing
 		readNonoWords = readNonoWordsFromFile();
-		System.out.println("Read nono-words after removing: " + readNonoWords);
+		//System.out.println("Read nono-words after removing: " + readNonoWords);
 	}
 
 	public static void saveIfNotExists() {
 		File file = new File(FILE_PATH);
 		if (!file.exists()) {
 			saveNonoWordsToFile(new ArrayList<>());
-			System.out.println("File created: " + FILE_PATH);
+			//System.out.println("File created: " + FILE_PATH);
 		}
 	}
 
@@ -56,7 +56,7 @@ public class filterStorage {
 			Yaml yaml = new Yaml(options);
 			yaml.dump(nonoWords, writer);
 
-			System.out.println("Nono-words saved to file.");
+			//System.out.println("Nono-words saved to file.");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -81,28 +81,32 @@ public class filterStorage {
 		List<String> nonoWords = readNonoWordsFromFile();
 		nonoWords.add(newNonoWord);
 		saveNonoWordsToFile(nonoWords);
-		System.out.println("Added nono-word: " + newNonoWord);
+		//System.out.println("Added nono-word: " + newNonoWord);
 	}
 
 	public static void removeNonoWord(String nonoWordToRemove) {
 		List<String> nonoWords = readNonoWordsFromFile();
 		if (nonoWords.remove(nonoWordToRemove)) {
 			saveNonoWordsToFile(nonoWords);
-			System.out.println("Removed nono-word: " + nonoWordToRemove);
+			//System.out.println("Removed nono-word: " + nonoWordToRemove);
 		} else {
-			System.out.println("Nono-word not found: " + nonoWordToRemove);
+			//System.out.println("Nono-word not found: " + nonoWordToRemove);
 		}
 	}
 
 	public static boolean containsNoNoWord(String message) {
 		List<String> nonoWords = readNonoWordsFromFile();
-		for (String nonoWord : nonoWords) {
-			if (message.contains(nonoWord)) {
+		String[] wordsInMessage = message.split(" ");
+		for (String word : wordsInMessage) {
+			if (nonoWords.contains(word)) {
 				return true;
 			}
 		}
 		return false;
 	}
+
+	// Levenshtein distance
+
 
 	public static boolean isNonoWord(String word) {
 		List<String> nonoWords = readNonoWordsFromFile();
@@ -112,6 +116,20 @@ public class filterStorage {
 			}
 		}
 		return false;
+	}
+
+	public static boolean isListEmpty() {
+		List<String> nonoWords = readNonoWordsFromFile();
+		if (nonoWords.isEmpty()) {
+			return true;
+		} else {
+			return false;
+		}
+
+	}
+
+	public static List<String> getNonoWords() {
+		return readNonoWordsFromFile();
 	}
 
 	public static filterStorage getInstance() {
